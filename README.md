@@ -1,10 +1,8 @@
 # VSA Reasoning — CPU Neural Reasoner
 
-[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red)]()
+[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red)]() [![VSA Reasoning](https://img.shields.io/badge/VSA%20Reasoning-Live%20Site-blue?style=for-the-badge)](https://fakeonomics.github.io/vsa-reasoning-overview/) [![GraphKAN](https://img.shields.io/badge/GraphKAN-Live%20Site-228b22?style=for-the-badge)](https://fakeonomics.github.io/graphkan-overview/)
 
 First learned neural reasoner on **Vector-Symbolic Architecture** with **ternary weights**. 90% exact multi-hop QA without LLM or GPU. 16 KB ternary resonator. Total pipeline <100 KB.
-
-> 🌐 **Live site**: [https://fakeonomics.github.io/vsa-reasoning-overview/](https://fakeonomics.github.io/vsa-reasoning-overview/) — full glassmorphism UI with animated SVG diagrams
 
 ---
 
