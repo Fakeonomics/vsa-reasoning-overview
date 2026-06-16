@@ -336,14 +336,14 @@
                 <!-- VSA store -->
                 <rect x="470" y="210" width="200" height="50" rx="14" fill="rgba(255,255,255,0.35)" stroke="rgba(180,150,120,0.3)" stroke-width="1"/>
                 <text x="570" y="232" text-anchor="middle" fill="#5a4f40" font-size="11" font-weight="500">VSA Memory (fallback)</text>
-                <text x="570" y="246" text-anchor="middle" fill="#8b7d6b" font-size="9">predicate shards, D=1024</text>
+                <text x="570" y="246" text-anchor="middle" fill="#8b7d6b" font-size="9">predicate-based retrieval</text>
                 <!-- Merge back -->
                 <path d="M 160 260 L 160 280 L 360 280" stroke="#b8a898" stroke-width="1" marker-end="url(#arr2)" fill="none"/>
                 <path d="M 570 260 L 570 280 L 360 280" stroke="#b8a898" stroke-width="1" marker-end="url(#arr2)" fill="none"/>
                 <!-- Resonator -->
                 <rect x="260" y="280" width="200" height="40" rx="14" fill="rgba(255,255,255,0.45)" stroke="rgba(180,150,120,0.35)" stroke-width="1.2" filter="url(#glow2)"/>
                 <text x="360" y="300" text-anchor="middle" fill="#2d261b" font-size="11" font-weight="600">GraphKANResonator</text>
-                <text x="360" y="314" text-anchor="middle" fill="#8b7d6b" font-size="9">16 KB ternary, 5 cycles</text>
+                <text x="360" y="314" text-anchor="middle" fill="#8b7d6b" font-size="9">16 KB ternary cleanup</text>
                 <path d="M 360 320 L 360 340" stroke="#b8a898" stroke-width="1.5" marker-end="url(#arr2)"/>
                 <!-- Learned components row -->
                 <rect x="80" y="340" width="180" height="36" rx="14" fill="rgba(255,255,255,0.4)" stroke="rgba(180,150,120,0.3)" stroke-width="1.2"/>
@@ -351,7 +351,7 @@
                 <text x="170" y="371" text-anchor="middle" fill="#8b7d6b" font-size="9">next predicate prediction</text>
                 <rect x="340" y="340" width="200" height="36" rx="14" fill="rgba(255,255,255,0.4)" stroke="rgba(180,150,120,0.3)" stroke-width="1.2"/>
                 <text x="440" y="358" text-anchor="middle" fill="#5a4f40" font-size="11" font-weight="500">ChainScorer (&lt;1 KB)</text>
-                <text x="440" y="371" text-anchor="middle" fill="#8b7d6b" font-size="9">Transformer 2L/4H/128d</text>
+                <text x="440" y="371" text-anchor="middle" fill="#8b7d6b" font-size="9">lightweight Transformer</text>
                 <rect x="600" y="340" width="100" height="36" rx="14" fill="rgba(255,255,255,0.45)" stroke="rgba(180,150,120,0.3)" stroke-width="1.2"/>
                 <text x="650" y="358" text-anchor="middle" fill="#5a4f40" font-size="11" font-weight="500">Beam</text>
                 <text x="650" y="371" text-anchor="middle" fill="#8b7d6b" font-size="9">width 1-3</text>
@@ -445,20 +445,19 @@
             <div>
                 <p style="font-weight:500; color:#2d261b; margin-bottom:8px;">GraphKANResonator</p>
                 <ul>
-                    <li>65,536 ternary weights {−1, 0, +1}</li>
-                    <li><strong>16 KB</strong> packed (2 bits/weight × 4/byte)</li>
-                    <li>D=1024 → proj(256) → 5 cycles → unproj → cleanup</li>
+                    <li>Ternary weights {−1, 0, +1}</li>
+                    <li><strong>16 KB</strong> compact model</li>
+                    <li>Learned VSA cleanup, 1.1ms inference</li>
                     <li>93% positive accuracy, <strong>0% false positives</strong></li>
-                    <li>1.1ms inference (vs 77s brute-force)</li>
                 </ul>
             </div>
             <div>
                 <p style="font-weight:500; color:#2d261b; margin-bottom:8px;">FastController + ChainScorer</p>
                 <ul>
-                    <li>Controller: MLP 2048→256→128→n_preds</li>
-                    <li>BC training, 37,384 float params (<strong>&lt;1 KB</strong>)</li>
+                    <li>Compact MLP for predicate prediction</li>
+                    <li>37K float params (<strong>&lt;1 KB</strong>)</li>
                     <li>100% train / 90% inference action accuracy</li>
-                    <li>ChainScorer: Transformer 2L/4H/128d</li>
+                    <li>Lightweight Transformer scorer</li>
                     <li><strong>100%</strong> ranking accuracy, 50K params (&lt;1 KB)</li>
                 </ul>
             </div>
@@ -483,9 +482,9 @@
                 <!-- Breakthrough 2 -->
                 <rect x="370" y="20" width="330" height="84" rx="12" fill="rgba(255,255,255,0.3)" stroke="rgba(180,150,120,0.2)" stroke-width="1"/>
                 <text x="535" y="42" text-anchor="middle" fill="#2d261b" font-size="12" font-weight="600">2. Negative Training Eliminates FPs</text>
-                <text x="535" y="60" text-anchor="middle" fill="#5a4f40" font-size="10">Contrastive loss (margin=0.25) on 200 negatives</text>
+                <text x="535" y="60" text-anchor="middle" fill="#5a4f40" font-size="10">Training with contrastive examples</text>
                 <text x="535" y="76" text-anchor="middle" fill="#5a4f40" font-size="10">FP rate: 1.3% → 0%</text>
-                <text x="535" y="92" text-anchor="middle" fill="#8b7d6b" font-size="9">max fake similarity: 0.483 → 0.380</text>
+                <text x="535" y="92" text-anchor="middle" fill="#8b7d6b" font-size="9">eliminates false positives entirely</text>
                 <!-- Breakthrough 3 -->
                 <rect x="20" y="118" width="330" height="84" rx="12" fill="rgba(255,255,255,0.3)" stroke="rgba(180,150,120,0.2)" stroke-width="1"/>
                 <text x="185" y="140" text-anchor="middle" fill="#2d261b" font-size="12" font-weight="600">3. Multi-hop Without LLM</text>
@@ -497,7 +496,7 @@
                 <text x="535" y="140" text-anchor="middle" fill="#2d261b" font-size="12" font-weight="600">4. VSA Superposition Noise Solved</text>
                 <text x="535" y="158" text-anchor="middle" fill="#5a4f40" font-size="10">~80% ceiling proven independent of dimension</text>
                 <text x="535" y="174" text-anchor="middle" fill="#5a4f40" font-size="10">Hybrid exact+VSA store: 80% → 90%</text>
-                <text x="535" y="190" text-anchor="middle" fill="#8b7d6b" font-size="9">empirical proof: D=1024 through D=8192</text>
+                <text x="535" y="190" text-anchor="middle" fill="#8b7d6b" font-size="9">verified across VSA dimensions</text>
             </svg>
         </div>
         <div class="svg-label">Four fundamental contributions — all fitting in &lt;100 KB</div>
