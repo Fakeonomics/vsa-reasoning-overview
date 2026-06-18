@@ -1,5 +1,4 @@
-# VSA-Reasoning > TernaT
+# VSA-Reasoning в†’ TernaT
 
-Репозиторий переименован в [**TernaT**](https://github.com/Fakeonomics/TernaT) (приватный).
-Публичный лендинг: [TernaT Overview](https://fakeonomics.github.io/TernaT-overview/)
-
+Р РµРїРѕР·РёС‚РѕСЂРёР№ РїРµСЂРµРёРјРµРЅРѕРІР°РЅ РІ [**TernaT**](https://github.com/Fakeonomics/TernaT) (РїСЂРёРІР°С‚РЅС‹Р№).
+РџСѓР±Р»РёС‡РЅС‹Р№ Р»РµРЅРґРёРЅРі: [TernaT Overview](https://fakeonomics.github.io/TernaT-overview/)
